@@ -43,17 +43,21 @@ const GuederApp = {
 
   setText(element, text) {
     document.querySelector(element).innerText = text;
+  },
+
+  init() {
+    this.getGeolocation()
+      .then(location => {
+        this.setText('#loadingMessage', 'Getting weather');
+        return this.getWeather(location.lat, location.lng);
+      })
+      .then(weather => {
+        console.log(weather.currently);
+        this.setText('#loadingMessage', `Temperature: ${Math.round(weather.currently.temperature)} °C`);
+      })
+      .catch(err => console.log(err.message));
   }
 };
 
-GuederApp.getGeolocation()
-  .then(location => {
-    GuederApp.setText('#loadingMessage', 'Getting weather');
-    return GuederApp.getWeather(location.lat, location.lng);
-  })
-  .then(weather => {
-    console.log(weather.currently);
-    GuederApp.setText('#loadingMessage', `Temperature: ${Math.round(weather.currently.temperature)} °C`);
-  })
-  .catch(err => console.log(err.message));
+GuederApp.init();
 
