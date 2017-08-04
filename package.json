@@ -1,0 +1,10 @@
+{
+  "name": "gueder-pwa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kus Cámara <kcmr@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "serve": "browser-sync start --server --files \"**/*.css, **/*.html, **/*.js\""
+  }
+}
