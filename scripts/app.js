@@ -6,48 +6,52 @@
 //     });
 // }
 
-function getGeolocation() {
-  return new Promise((resolve, reject) => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(pos => {
-        resolve({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        });
-      }, err => reject(err));
-    } else {
-      throw new Error('Your browser does not support geolocation :(');
-    }
-  });
-}
+const GuederApp = {
+  API_KEY: '7e1fd95cfe31530bc20639de15507835',
 
-function getWeather(lat, lng) {
-  const API_KEY = '7e1fd95cfe31530bc20639de15507835';
-  let weatherUrl = `https://api.darksky.net/forecast/${API_KEY}/${lat},${lng}?language=es&units=auto&callback=getWeather.parseData`;
-  let script = document.createElement('script');
-  script.src = weatherUrl;
-  document.getElementsByTagName('head')[0].appendChild(script);
+  getGeolocation() {
+    return new Promise((resolve, reject) => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(pos => {
+          resolve({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          });
+        }, err => reject(err));
+      } else {
+        throw new Error('Your browser does not support geolocation :(');
+      }
+    });
+  },
 
-  return new Promise((resolve, reject) => {
-    getWeather.parseData = data => {
-      resolve(JSON.parse(JSON.stringify(data)));
-    };
+  getWeather(lat, lng) {
+    let weatherUrl = `https://api.darksky.net/forecast/${this.API_KEY}/${lat},${lng}?language=es&units=auto&callback=GuederApp.getWeather.parseData`;
+    let script = document.createElement('script');
+    script.src = weatherUrl;
+    document.getElementsByTagName('head')[0].appendChild(script);
 
-    script.onerror = err => reject(err);
-  });
-}
+    return new Promise((resolve, reject) => {
+      this.getWeather.parseData = data => {
+        resolve(JSON.parse(JSON.stringify(data)));
+      };
 
-function setText(element, text) {
-  document.querySelector(element).innerText = text;
-}
+      script.onerror = err => reject(err);
+    });
+  },
 
-getGeolocation()
+  setText(element, text) {
+    document.querySelector(element).innerText = text;
+  }
+};
+
+GuederApp.getGeolocation()
   .then(location => {
-    setText('#loadingMessage', 'Getting weather');
-    return getWeather(location.lat, location.lng);
+    GuederApp.setText('#loadingMessage', 'Getting weather');
+    return GuederApp.getWeather(location.lat, location.lng);
   })
   .then(weather => {
     console.log(weather.currently);
-    setText('#loadingMessage', `Temperature: ${Math.round(weather.currently.temperature)} °C`);
+    GuederApp.setText('#loadingMessage', `Temperature: ${Math.round(weather.currently.temperature)} °C`);
   })
   .catch(err => console.log(err.message));
+
