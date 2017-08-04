@@ -8,6 +8,8 @@
 
 const GuederApp = {
   API_KEY: '7e1fd95cfe31530bc20639de15507835',
+  weatherEndpoint: 'https://api.darksky.net/forecast/',
+  language: 'es',
 
   getGeolocation() {
     return new Promise((resolve, reject) => {
@@ -25,7 +27,7 @@ const GuederApp = {
   },
 
   getWeather(lat, lng) {
-    let weatherUrl = `https://api.darksky.net/forecast/${this.API_KEY}/${lat},${lng}?language=es&units=auto&callback=GuederApp.getWeather.parseData`;
+    let weatherUrl = `${this.weatherEndpoint}${this.API_KEY}/${lat},${lng}?language=${this.language}&units=auto&callback=GuederApp.getWeather.parseData`;
     let script = document.createElement('script');
     script.src = weatherUrl;
     document.getElementsByTagName('head')[0].appendChild(script);
