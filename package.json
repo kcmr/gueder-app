@@ -5,6 +5,6 @@
   "author": "Kus Cámara <kcmr@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "serve": "browser-sync start --server --files \"**/*.css, **/*.html, **/*.js\""
+    "serve": "browser-sync start --server --files \"**/*.css, **/*.html, **/*.js\" --no-open"
   }
 }
