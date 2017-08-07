@@ -1,4 +1,4 @@
-const GeoApp = new Vue({
+new Vue({
   el: '#app',
   data: {
     API_KEY: '7e1fd95cfe31530bc20639de15507835',
