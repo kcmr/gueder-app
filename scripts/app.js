@@ -26,15 +26,15 @@ const GeoApp = new Vue({
       let script = document.createElement('script');
       script.src = weatherUrl;
       document.getElementsByTagName('head')[0].appendChild(script);
-  
+
       return new Promise((resolve, reject) => {
         this.getWeather.parseData = data => {
           resolve(JSON.parse(JSON.stringify(data)));
         };
-  
+
         script.onerror = err => reject(err);
       });
-    }    
+    }
   },
   created: function() {
     this.getGeolocation()
