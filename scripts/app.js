@@ -26,7 +26,7 @@ const GuederApp = {
     });
   },
 
-  getWeather(lat, lng) {
+  getWeather({lat, lng}) {
     let weatherUrl = `${this.weatherEndpoint}${this.API_KEY}/${lat},${lng}?language=${this.language}&units=auto&callback=GuederApp.getWeather.parseData`;
     let script = document.createElement('script');
     script.src = weatherUrl;
@@ -49,7 +49,7 @@ const GuederApp = {
     this.getGeolocation()
       .then(location => {
         this.setText('#loadingMessage', 'Getting weather');
-        return this.getWeather(location.lat, location.lng);
+        return this.getWeather(location);
       })
       .then(weather => {
         console.log(weather.currently);
