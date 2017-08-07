@@ -22,17 +22,13 @@ const GeoApp = new Vue({
       });
     },
     getWeather: function({lat, lng}) {
-      let weatherUrl = `${this.weatherEndpoint}${this.API_KEY}/${lat},${lng}?language=${this.language}&units=auto&callback=GeoApp.getWeather.parseData`;
-      let script = document.createElement('script');
-      script.src = weatherUrl;
-      document.getElementsByTagName('head')[0].appendChild(script);
-
+      let weatherUrl = `${this.weatherEndpoint}${this.API_KEY}/${lat},${lng}?language=${this.language}&units=auto`;
       return new Promise((resolve, reject) => {
-        this.getWeather.parseData = data => {
-          resolve(JSON.parse(JSON.stringify(data)));
-        };
-
-        script.onerror = err => reject(err);
+        this.$http.jsonp(weatherUrl)
+          .then(
+            response => resolve(response.body),
+            error => reject(error)
+          );
       });
     }
   },
