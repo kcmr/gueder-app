@@ -4,7 +4,15 @@ new Vue({
     API_KEY: '7e1fd95cfe31530bc20639de15507835',
     weatherEndpoint: 'https://api.darksky.net/forecast/',
     language: 'es',
-    message: 'Finding you...'
+    message: 'Finding you...',
+    temperature: null
+  },
+  computed: {
+    tempClassName: function() {
+      return (this.temperature && this.temperature < 15) ? 'frio' :
+             (this.temperature > 18 && this.temperature < 25) ? 'bien' :
+             (this.temperature > 25) ? 'calo' : 'default';
+    }
   },
   methods: {
     getGeolocation: function() {
@@ -40,8 +48,9 @@ new Vue({
       })
       .then(weather => {
         console.log(weather.currently);
+        this.temperature = weather.currently.temperature;
         this.message = `Temperature: ${Math.round(weather.currently.temperature)} °C`;
       })
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err.message || err));
   }
 });
