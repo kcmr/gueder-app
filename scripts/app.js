@@ -10,7 +10,7 @@ new Vue({
   computed: {
     tempClassName: function() {
       return (this.temperature && this.temperature < 15) ? 'frio' :
-             (this.temperature > 18 && this.temperature < 25) ? 'bien' :
+             (this.temperature > 15 && this.temperature < 25) ? 'bien' :
              (this.temperature > 25) ? 'calo' : 'default';
     }
   },
