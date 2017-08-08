@@ -1,3 +1,10 @@
+html {
+  --default-bg-color: #B4B4B4;
+  --red-bg-color: #E91E63;
+  --green-bg-color: #A5E291;
+  --blue-bg-color: #2473DF;
+}
+
 html,
 body {
   margin: 0;
@@ -18,7 +25,7 @@ body {
 
 h1 { margin: 0; }
 
-.default { background-color: #B4B4B4; }
-.calo { background-color: #E91E63; }
-.bien { background-color: #A5E291; }
-.frio { background-color: #2473DF; }
+.default { background-color: var(--default-bg-color); }
+.calo { background-color: var(--red-bg-color); }
+.bien { background-color: var(--green-bg-color); }
+.frio { background-color: var(--blue-bg-color); }
