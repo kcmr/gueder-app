@@ -27,7 +27,7 @@
 
   <div id="app" :class="tempClassName">
     <div class="content">
-      <svg viewBox="0 0 24 24" class="icon icon-loading" v-if="!temperature">
+      <svg viewBox="0 0 24 24" class="icon icon-loading" v-if="!hasTemperature">
         <use xlink:href="#compass"></use>
       </svg>
       <svg viewBox="0 0 24 24" class="icon" v-else>
