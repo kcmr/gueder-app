@@ -65,3 +65,12 @@ h1, p { margin: 0; }
 .t-20-30::after { background: linear-gradient(134deg, #DE2434 0%, #F98721 73%); }
 .t-30-40::after { background: linear-gradient(-43deg, #F5515F 8%, #9F041B 100%); }
 .night::after   { background: linear-gradient(134deg, #0B044A 0%, #3B5C97 100%); }
+
+@keyframes rotate {
+  to { transform: rotate(1turn); }
+}
+
+.icon-loading {
+  animation: rotate 2.5s infinite;
+  animation-direction: alternate;
+}
