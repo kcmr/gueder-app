@@ -16,7 +16,7 @@ new Vue({
     }
   },
   watch: {
-    weather: function() {
+    weather() {
       this.weatherAvailable = true;
       this.temperature = Math.round(this.weather.currently.temperature);
       this.icon = `#${this.weather.currently.icon}`;
@@ -50,10 +50,16 @@ new Vue({
     _setBottomGraph(direction) {
       anime({
         targets: '.bottom-graph path',
-        duration: 2000,
-        easing: 'linear',
-        opacity: 1,
-        d: direction
+        opacity: [
+          { value: 1, duration: 600 }
+        ],
+        scaleY: [
+          { value: 0, duration: 0 },
+          { value: 1, duration: 1000, delay: 600, easing: 'easeOutExpo' }
+        ],
+        d: [
+          { value: direction, delay: 1000, duration: 2000 }
+        ]
       });
     },
     getGeolocation() {

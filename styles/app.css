@@ -81,6 +81,7 @@ body {
   opacity: 0;
   fill: #fff;
   fill-opacity: 0.2;
+  transform-origin: bottom center;
 }
 
 .t-0-5::after   { background: linear-gradient(134deg, #3023AE 0%, #C86DD7 71%); }
