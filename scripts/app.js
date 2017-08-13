@@ -4,16 +4,40 @@ new Vue({
     API_KEY: '7e1fd95cfe31530bc20639de15507835',
     weatherEndpoint: 'https://api.darksky.net/forecast/',
     language: 'es',
-    message: 'Finding you...',
+    message: '',
+    icon: '',
+    tempClassName: '',
     temperature: null,
-    icon: ''
+    weather: null,
+    weatherAvailable: false,
+    bottomGraphPaths: {
+      initial: 'M0,33 C53.3256793,37.6666667 106.656408,40 159.992188,40 C213.327967,40 266.663904,37.6666667 320,33 L320,165 L0,165 L0,33 Z',
+      ascending: 'M0,43 C53.3256793,27.6666667 106.656408,20 159.992188,20 C213.327967,20 266.663904,27.6666667 320,43 L320,165 L0,165 L0,43 Z',
+      descending: 'M0,23 C53.3256793,34.3333333 106.656408,40 159.992188,40 C213.327967,40 266.663904,34.3333333 320,23 L320,165 L0,165 L0,23 Z'
+    }
   },
-  computed: {
-    hasTemperature() {
-      return !Number.isNaN(this.temperature) && Number.isFinite(this.temperature);
-    },
-    tempClassName() {
-      // TODO: class for < 0
+  watch: {
+    weather: function() {
+      this.weatherAvailable = true;
+      this.temperature = Math.round(this.weather.currently.temperature);
+      this.icon = `#${this.weather.currently.icon}`;
+      this.message = `${this.temperature}°C`;
+      this._setTempClassName();
+
+      if (Math.round(this.weather.hourly.data[1].temperature) > this.temperature) {
+        this._setBottomGraph(this.bottomGraphPaths.ascending);
+      } else {
+        this._setBottomGraph(this.bottomGraphPaths.descending);
+      }
+    }
+  },
+  methods: {
+    _setTempClassName() {
+      if (this.weather.currently.icon.match('-night')) {
+        this.tempClassName = 't-night';
+        return;
+      }
+
       const tempClassMap = {
         0: 't-0-5',
         5: 't-5-10',
@@ -22,11 +46,18 @@ new Vue({
         30: 't-30-40'
       };
 
-      const matches = Object.keys(tempClassMap).filter(key => Math.round(this.temperature) >= Number(key));
-      return this.hasTemperature ? tempClassMap[matches.pop()] : 'default';
-    }
-  },
-  methods: {
+      const matches = Object.keys(tempClassMap).filter(key => this.temperature >= Number(key));
+      this.tempClassName = tempClassMap[matches.pop()];
+    },
+    _setBottomGraph(direction) {
+      anime({
+        targets: '.bottom-graph path',
+        duration: 2000,
+        easing: 'linear',
+        opacity: 1,
+        d: direction
+      });
+    },
     getGeolocation() {
       return new Promise((resolve, reject) => {
         if ('geolocation' in navigator) {
@@ -53,17 +84,19 @@ new Vue({
     }
   },
   created() {
+    this.svgAttributes = anime({
+      targets: '.bottom-graph path',
+      autoplay: false,
+      opacity: 1,
+      d: [{
+        // value: 'M0,23 C53.3256793,34.3333333 106.656408,40 159.992188,40 C213.327967,40 266.663904,34.3333333 320,23 L320,165 L0,165 L0,23 Z'
+        value: 'M0,43 C53.3256793,27.6666667 106.656408,20 159.992188,20 C213.327967,20 266.663904,27.6666667 320,43 L320,165 L0,165 L0,43 Z'
+      }]
+    });
+
     this.getGeolocation()
-      .then(location => {
-        this.message = 'Getting weather';
-        return this.getWeather(location);
-      })
-      .then(weather => {
-        console.log(weather.currently);
-        this.temperature = weather.currently.temperature;
-        this.icon = `#${weather.currently.icon}`;
-        this.message = `Temperature: ${Math.round(weather.currently.temperature)} °C`;
-      })
+      .then(location => this.getWeather(location))
+      .then(weather => this.weather = weather)
       .catch(err => console.log(err.message || err));
   }
 });

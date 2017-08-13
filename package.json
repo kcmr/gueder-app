@@ -8,6 +8,7 @@
     "serve": "browser-sync start --server --files \"**/*.css, **/*.html, **/*.js\" --no-open --no-notify"
   },
   "dependencies": {
+    "animejs": "^2.0.2",
     "vue": "^2.4.2",
     "vue-resource": "^1.3.4"
   }

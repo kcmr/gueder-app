@@ -5,6 +5,7 @@ html {
 html,
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 [hidden] { display: none; }
@@ -57,14 +58,37 @@ body {
   z-index: 1;
 }
 
-h1, p { margin: 0; }
+.message {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  bottom: 38px;
+  font-size: 50px;
+}
+
+.bottom-graph {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  max-height: 165px;
+  z-index: 1;
+}
+.bottom-graph path {
+  opacity: 0;
+  fill: #fff;
+  fill-opacity: 0.2;
+}
 
 .t-0-5::after   { background: linear-gradient(134deg, #3023AE 0%, #C86DD7 71%); }
 .t-5-10::after  { background: linear-gradient(135deg, #3023AE 0%, #2AEAFF 100%); }
 .t-10-20::after { background: linear-gradient(-45deg, #FAD961 0%, #F76B1C 100%); }
 .t-20-30::after { background: linear-gradient(134deg, #DE2434 0%, #F98721 73%); }
 .t-30-40::after { background: linear-gradient(-43deg, #F5515F 8%, #9F041B 100%); }
-.night::after   { background: linear-gradient(134deg, #0B044A 0%, #3B5C97 100%); }
+.t-night::after   { background: linear-gradient(134deg, #0B044A 0%, #3B5C97 100%); }
 
 @keyframes rotate {
   to { transform: rotate(1turn); }

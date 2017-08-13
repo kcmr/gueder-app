@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles/app.css">
   <script src="node_modules/vue/dist/vue.js"></script>
   <script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
+  <script src="node_modules/animejs/anime.min.js"></script>
 </head>
 <body>
   <svg hidden>
@@ -25,16 +26,21 @@
     </defs>
   </svg>
 
+  <svg class="bottom-graph" viewBox="0 0 320 165" preserveAspectRatio="none">
+    <path d="M0,33 C53.3256793,37.6666667 106.656408,40 159.992188,40 C213.327967,40 266.663904,37.6666667 320,33 L320,165 L0,165 L0,33 Z" fill-rule="evenodd" />
+  </svg>
+
   <div id="app" :class="tempClassName">
     <div class="content">
-      <svg viewBox="0 0 24 24" class="icon icon-loading" v-if="!hasTemperature">
+      <svg viewBox="0 0 24 24" class="icon icon-loading" v-if="!weatherAvailable">
         <use xlink:href="#compass"></use>
       </svg>
       <svg viewBox="0 0 24 24" class="icon" v-else>
         <use :xlink:href="icon"></use>
       </svg>
-      <p>{{message}}</p>
     </div>
+
+    <div class="message">{{message}}</div>
   </div>
   <script src="scripts/app.js" async></script>
 </body>
