@@ -20,12 +20,37 @@ body {
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  transition: background-color 0.5s;
+  position: relative;
+  background: var(--default-bg-color);
+}
+
+#app::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+#app[class*="t-"]::after {
+  opacity: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
 }
 
 h1 { margin: 0; }
 
-.default { background-color: var(--default-bg-color); }
-.calo { background-color: var(--red-bg-color); }
-.bien { background-color: var(--green-bg-color); }
-.frio { background-color: var(--blue-bg-color); }
+.t-0-5::after   { background: linear-gradient(134deg, #3023AE 0%, #C86DD7 71%); }
+.t-5-10::after  { background: linear-gradient(135deg, #3023AE 0%, #2AEAFF 100%); }
+.t-10-20::after { background: linear-gradient(-45deg, #FAD961 0%, #F76B1C 100%); }
+.t-20-30::after { background: linear-gradient(134deg, #DE2434 0%, #F98721 73%); }
+.t-30-40::after { background: linear-gradient(-43deg, #F5515F 8%, #9F041B 100%); }
+.night::after   { background: linear-gradient(134deg, #0B044A 0%, #3B5C97 100%); }
