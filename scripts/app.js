@@ -19,7 +19,8 @@ new Vue({
       };
 
       const matches = Object.keys(tempClassMap).filter(key => Math.round(this.temperature) >= Number(key));
-      return this.temperature ? tempClassMap[matches.pop()] : 'default';
+      // TODO: class for < 0
+      return !Number.isNaN(this.temperature) && Number.isFinite(this.temperature) ? tempClassMap[matches.pop()] : 'default';
     }
   },
   methods: {
