@@ -18,14 +18,18 @@ body {
 
 .icon {
   display: inline-block;
-  width: 100px;
-  height: 100px;
+  width: 157px;
+  height: 157px;
   fill: #fff;
+  position: absolute;
+  top: 95px;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 #app {
   height: 100vh;
-  padding: 20px;
   box-sizing: border-box;
   position: relative;
   background: var(--default-bg-color);
@@ -53,7 +57,7 @@ body {
   z-index: 1;
 }
 
-h1 { margin: 0; }
+h1, p { margin: 0; }
 
 .t-0-5::after   { background: linear-gradient(134deg, #3023AE 0%, #C86DD7 71%); }
 .t-5-10::after  { background: linear-gradient(135deg, #3023AE 0%, #2AEAFF 100%); }
