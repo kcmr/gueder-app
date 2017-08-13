@@ -23,11 +23,10 @@ new Vue({
       this.message = `${this.temperature}°C`;
       this._setTempClassName();
 
-      if (Math.round(this.weather.hourly.data[1].temperature) > this.temperature) {
-        this._setBottomGraph(this.bottomGraphPaths.ascending);
-      } else {
-        this._setBottomGraph(this.bottomGraphPaths.descending);
-      }
+      const direction = Math.round(this.weather.hourly.data[1].temperature) > this.temperature
+        ? this.bottomGraphPaths.ascending
+        : this.bottomGraphPaths.descending;
+      this._setBottomGraph(direction);
     }
   },
   methods: {
