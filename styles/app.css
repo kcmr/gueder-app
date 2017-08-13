@@ -7,10 +7,20 @@ body {
   margin: 0;
 }
 
+[hidden] { display: none; }
+
 body {
   font-family: sans-serif;
   text-align: center;
   font-size: 2rem;
+  color: #fff;
+}
+
+.icon {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  fill: #fff;
 }
 
 #app {

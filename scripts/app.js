@@ -5,7 +5,8 @@ new Vue({
     weatherEndpoint: 'https://api.darksky.net/forecast/',
     language: 'es',
     message: 'Finding you...',
-    temperature: null
+    temperature: null,
+    icon: ''
   },
   computed: {
     tempClassName() {
@@ -51,6 +52,7 @@ new Vue({
       .then(weather => {
         console.log(weather.currently);
         this.temperature = weather.currently.temperature;
+        this.icon = `#${weather.currently.icon}`;
         this.message = `Temperature: ${Math.round(weather.currently.temperature)} °C`;
       })
       .catch(err => console.log(err.message || err));
