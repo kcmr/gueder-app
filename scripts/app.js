@@ -8,7 +8,7 @@ new Vue({
     temperature: null
   },
   computed: {
-    tempClassName: function() {
+    tempClassName() {
       return (this.temperature &&       this.temperature < 5)  ? 't-0-5' :
              (this.temperature >= 5 &&  this.temperature < 10) ? 't-5-10' :
              (this.temperature >= 10 && this.temperature < 20) ? 't-10-20' :
@@ -17,7 +17,7 @@ new Vue({
     }
   },
   methods: {
-    getGeolocation: function() {
+    getGeolocation() {
       return new Promise((resolve, reject) => {
         if ('geolocation' in navigator) {
           navigator.geolocation.getCurrentPosition(pos => {
@@ -31,7 +31,7 @@ new Vue({
         }
       });
     },
-    getWeather: function({lat, lng}) {
+    getWeather({lat, lng}) {
       let weatherUrl = `${this.weatherEndpoint}${this.API_KEY}/${lat},${lng}?language=${this.language}&units=auto`;
       return new Promise((resolve, reject) => {
         this.$http.jsonp(weatherUrl)
@@ -42,7 +42,7 @@ new Vue({
       });
     }
   },
-  created: function() {
+  created() {
     this.getGeolocation()
       .then(location => {
         this.message = 'Getting weather';
