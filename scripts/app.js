@@ -11,7 +11,6 @@ new Vue({
     weather: null,
     weatherAvailable: false,
     bottomGraphPaths: {
-      initial: 'M0,33 C53.3256793,37.6666667 106.656408,40 159.992188,40 C213.327967,40 266.663904,37.6666667 320,33 L320,165 L0,165 L0,33 Z',
       ascending: 'M0,43 C53.3256793,27.6666667 106.656408,20 159.992188,20 C213.327967,20 266.663904,27.6666667 320,43 L320,165 L0,165 L0,43 Z',
       descending: 'M0,23 C53.3256793,34.3333333 106.656408,40 159.992188,40 C213.327967,40 266.663904,34.3333333 320,23 L320,165 L0,165 L0,23 Z'
     }
@@ -84,16 +83,6 @@ new Vue({
     }
   },
   created() {
-    this.svgAttributes = anime({
-      targets: '.bottom-graph path',
-      autoplay: false,
-      opacity: 1,
-      d: [{
-        // value: 'M0,23 C53.3256793,34.3333333 106.656408,40 159.992188,40 C213.327967,40 266.663904,34.3333333 320,23 L320,165 L0,165 L0,23 Z'
-        value: 'M0,43 C53.3256793,27.6666667 106.656408,20 159.992188,20 C213.327967,20 266.663904,27.6666667 320,43 L320,165 L0,165 L0,43 Z'
-      }]
-    });
-
     this.getGeolocation()
       .then(location => this.getWeather(location))
       .then(weather => this.weather = weather)
