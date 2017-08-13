@@ -10,11 +10,16 @@ new Vue({
   },
   computed: {
     tempClassName() {
-      return (this.temperature &&       this.temperature < 5)  ? 't-0-5' :
-             (this.temperature >= 5 &&  this.temperature < 10) ? 't-5-10' :
-             (this.temperature >= 10 && this.temperature < 20) ? 't-10-20' :
-             (this.temperature >= 20 && this.temperature < 30) ? 't-20-30' :
-             (this.temperature >= 30) ? 't-30-40' : 'default';
+      const tempClassMap = {
+        0: 't-0-5',
+        5: 't-5-10',
+        10: 't-10-20',
+        20: 't-20-30',
+        30: 't-30-40'
+      };
+
+      const matches = Object.keys(tempClassMap).filter(key => Math.round(this.temperature) >= Number(key));
+      return this.temperature ? tempClassMap[matches.pop()] : 'default';
     }
   },
   methods: {
