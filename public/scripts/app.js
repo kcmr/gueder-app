@@ -20,7 +20,8 @@ new Vue({
       this.weatherAvailable = true;
       this.temperature = Math.round(this.weather.currently.temperature);
       this.icon = `#${this.weather.currently.icon}`;
-      this.message = `${this.temperature}°C`;
+      this.message = '0°C';
+      this._animateTemperature();
       this._setTempClassName();
 
       const direction = Math.round(this.weather.hourly.data[1].temperature) > this.temperature
@@ -46,6 +47,19 @@ new Vue({
 
       const matches = Object.keys(tempClassMap).filter(key => this.temperature >= Number(key));
       this.tempClassName = tempClassMap[matches.pop()];
+    },
+    _animateTemperature() {
+      let obj = {value: this.message};
+      anime({
+        targets: obj,
+        value: `${this.temperature}°C`,
+        round: 1,
+        duration: 1500,
+        easing: 'linear',
+        update: () => {
+          this.message = obj.value;
+        }
+      });
     },
     _setBottomGraph(direction) {
       anime({
