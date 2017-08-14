@@ -27,10 +27,6 @@
     </defs>
   </svg>
 
-  <svg class="bottom-graph" viewBox="0 0 320 165" preserveAspectRatio="none">
-    <path d="M0,33 C53.3256793,37.6666667 106.656408,40 159.992188,40 C213.327967,40 266.663904,37.6666667 320,33 L320,165 L0,165 L0,33 Z" fill-rule="evenodd" />
-  </svg>
-
   <div id="app" :class="tempClassName">
     <div class="content">
       <svg viewBox="0 0 24 24" class="icon icon-loading" v-if="!weatherAvailable">
@@ -39,9 +35,13 @@
       <svg viewBox="0 0 64 64" class="icon" v-else>
         <use :xlink:href="icon"></use>
       </svg>
+      <div class="message">{{message}}</div>
     </div>
 
-    <div class="message">{{message}}</div>
+    <svg class="bottom-graph" viewBox="0 0 320 165" preserveAspectRatio="none">
+      <path d="M0,33 C53.3256793,37.6666667 106.656408,40 159.992188,40 C213.327967,40 266.663904,37.6666667 320,33 L320,165 L0,165 L0,33 Z" fill-rule="evenodd" />
+    </svg>
+
   </div>
   <script src="scripts/app.js" async></script>
 </body>
