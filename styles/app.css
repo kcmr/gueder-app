@@ -17,18 +17,6 @@ body {
   color: #fff;
 }
 
-.icon {
-  display: inline-block;
-  width: 157px;
-  height: 157px;
-  fill: #fff;
-  position: absolute;
-  top: 95px;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
 #app {
   height: 100vh;
   box-sizing: border-box;
@@ -53,9 +41,32 @@ body {
   opacity: 1;
 }
 
+.t-0-5::after   { background: linear-gradient(134deg, #3023AE 0%, #C86DD7 71%); }
+.t-5-10::after  { background: linear-gradient(135deg, #3023AE 0%, #2AEAFF 100%); }
+.t-10-20::after { background: linear-gradient(-45deg, #FAD961 0%, #F76B1C 100%); }
+.t-20-30::after { background: linear-gradient(134deg, #DE2434 0%, #F98721 73%); }
+.t-30-40::after { background: linear-gradient(-43deg, #F5515F 8%, #9F041B 100%); }
+.t-night::after { background: linear-gradient(134deg, #0B044A 0%, #3B5C97 100%); }
+
 .content {
   position: relative;
   z-index: 1;
+}
+
+.icon {
+  width: 157px;
+  height: 157px;
+  fill: #fff;
+  position: absolute;
+  top: 95px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.icon-loading {
+  animation: rotate 2.5s infinite;
+  animation-direction: alternate;
 }
 
 .message {
@@ -84,18 +95,6 @@ body {
   transform-origin: bottom center;
 }
 
-.t-0-5::after   { background: linear-gradient(134deg, #3023AE 0%, #C86DD7 71%); }
-.t-5-10::after  { background: linear-gradient(135deg, #3023AE 0%, #2AEAFF 100%); }
-.t-10-20::after { background: linear-gradient(-45deg, #FAD961 0%, #F76B1C 100%); }
-.t-20-30::after { background: linear-gradient(134deg, #DE2434 0%, #F98721 73%); }
-.t-30-40::after { background: linear-gradient(-43deg, #F5515F 8%, #9F041B 100%); }
-.t-night::after   { background: linear-gradient(134deg, #0B044A 0%, #3B5C97 100%); }
-
 @keyframes rotate {
   to { transform: rotate(1turn); }
-}
-
-.icon-loading {
-  animation: rotate 2.5s infinite;
-  animation-direction: alternate;
 }
