@@ -55,11 +55,11 @@ body {
 }
 
 .icon {
-  width: 157px;
-  height: 157px;
+  width: 246px;
+  height: 246px;
   fill: #fff;
   position: absolute;
-  top: 95px;
+  top: 35px;
   left: 0;
   right: 0;
   margin: auto;
@@ -73,6 +73,8 @@ body {
 }
 
 .icon-loading {
+  width: 157px;
+  height: 157px;
   top: 0;
   bottom: 0;
   fill: #C9C7C7;
