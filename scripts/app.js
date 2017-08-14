@@ -77,7 +77,7 @@ new Vue({
       });
     },
     getWeather({lat, lng}) {
-      let weatherUrl = `${this.weatherEndpoint}${this.API_KEY}/${lat},${lng}?language=${this.language}&units=auto`;
+      let weatherUrl = `${this.weatherEndpoint}${this.API_KEY}/${lat},${lng}?language=${this.language}&units=auto&exclude=minutely,daily,alerts,flags`;
       return new Promise((resolve, reject) => {
         this.$http.jsonp(weatherUrl)
           .then(
