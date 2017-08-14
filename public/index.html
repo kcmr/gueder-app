@@ -35,7 +35,7 @@
       <svg viewBox="0 0 64 64" class="icon" v-else>
         <use :xlink:href="icon"></use>
       </svg>
-      <div class="message">{{message}}</div>
+      <div class="message" :class="{'message-ready': weatherAvailable}">{{message}}</div>
     </div>
 
     <svg class="bottom-graph" viewBox="0 0 320 165" preserveAspectRatio="none">
